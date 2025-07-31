@@ -1,3 +1,4 @@
+#![cfg(all(not(feature = "hidapi")))]
 use parking_lot::Mutex;
 use std::convert::TryFrom;
 use std::sync::mpsc::{

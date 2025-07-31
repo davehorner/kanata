@@ -5,10 +5,22 @@ mod linux;
 #[cfg(target_os = "linux")]
 pub use linux::*;
 
-#[cfg(target_os = "windows")]
+#[cfg(all(target_os = "windows", not(feature = "hidapi")))]
 mod windows;
-#[cfg(target_os = "windows")]
+#[cfg(all(target_os = "windows", not(feature = "hidapi")))]
 pub use windows::*;
+
+#[cfg(feature = "hidapi")]
+mod hidapi;
+#[cfg(feature = "hidapi")]
+pub use hidapi::*;
+
+// Export LLHOOK_IDLE_TIME_SECS_CLEAR_INPUTS for windows/mod.rs and others
+#[cfg(any(
+    all(target_os = "windows", not(feature = "hidapi")),
+    feature = "hidapi"
+))]
+pub const LLHOOK_IDLE_TIME_SECS_CLEAR_INPUTS: u64 = 60;
 
 #[cfg(target_os = "macos")]
 mod macos;

@@ -58,6 +58,7 @@ web-time = "1.1.0"
 kanata-keyberon = { path = "keyberon", version = "0.190.0" }
 kanata-parser =   { path = "parser", version = "0.190.0" }
 kanata-tcp-protocol = { path = "tcp_protocol", version = "0.190.0" }
+hidapi = "2.6.3"
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 arboard = "3.4"
@@ -118,8 +119,9 @@ indoc = { version = "2.0.4", optional = true }
 regex = { version = "1.10.4", optional = true }
 
 [features]
-default = ["tcp_server","win_sendinput_send_scancodes", "zippychord", "watch"]
+default = ["tcp_server","win_sendinput_send_scancodes", "zippychord", "watch","hidapi"]
 perf_logging = []
+hidapi = []
 tcp_server = ["serde_json"]
 win_sendinput_send_scancodes = ["kanata-parser/win_sendinput_send_scancodes"]
 win_llhook_read_scancodes = ["kanata-parser/win_llhook_read_scancodes"]

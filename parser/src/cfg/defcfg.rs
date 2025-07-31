@@ -178,6 +178,8 @@ pub struct CfgOptions {
         feature = "gui"
     ))]
     pub gui_opts: CfgOptionsGui,
+    pub vid: Option<u16>,
+    pub pid: Option<u16>,
 }
 
 impl Default for CfgOptions {
@@ -227,6 +229,8 @@ impl Default for CfgOptions {
                 feature = "gui"
             ))]
             gui_opts: Default::default(),
+            vid: None,
+            pid: None,
         }
     }
 }
@@ -259,6 +263,14 @@ pub fn parse_defcfg(expr: &[SExpr]) -> Result<CfgOptions> {
                     bail_expr!(key, "Duplicate defcfg option {}", label);
                 }
                 match label {
+                    "vendor-id" => {
+                        let v = parse_cfg_val_u16(val, label, false)?;
+                        cfg.vid = Some(v);
+                    }
+                    "product-id" => {
+                        let v = parse_cfg_val_u16(val, label, false)?;
+                        cfg.pid = Some(v);
+                    }
                     "sequence-timeout" => {
                         cfg.sequence_timeout =
                             parse_cfg_val_u16(val, label, true)?;

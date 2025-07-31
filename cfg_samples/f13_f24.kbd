@@ -1,5 +1,7 @@
 (defcfg
   linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
+  vendor-id 0x413c
+  product-id 0x2002
 )
 
 (defsrc

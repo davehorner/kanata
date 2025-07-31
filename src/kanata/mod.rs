@@ -298,7 +298,7 @@ enum ReloadAction {
     ReloadFile(String),
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct CalculatedMouseMove {
     pub direction: MoveDirection,
     pub distance: u16,
